@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/characters_fragment">
+
+    <action
+        android:id="@+id/routeFavourite"
+        app:destination="@+id/favourite_fragment" />
+
+    <fragment
+        android:id="@+id/characters_fragment"
+        android:name="com.mk8.pruebarickmorty.screen.main.MainFragment"
+        tools:layout="@layout/main_layout">
+
+        <action
+            android:id="@+id/routeDetail"
+            app:destination="@+id/detail_fragment" />
+
+        <action
+            android:id="@+id/routeFavourite"
+            app:destination="@+id/favourite_fragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/detail_fragment"
+        android:name="com.mk8.pruebarickmorty.screen.detail.DetailFragment"
+        tools:layout="@layout/detail_layout">
+
+        <argument
+            android:name="identifier"
+            app:argType="integer"
+            app:nullable="false" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/favourite_fragment"
+        android:name="com.mk8.pruebarickmorty.screen.favourite.FavouriteFragment"
+        tools:layout="@layout/favourite_layout" >
+
+        <action
+            android:id="@+id/routeDetail"
+            app:destination="@+id/detail_fragment" />
+
+    </fragment>
+
+</navigation>

@@ -1,0 +1,109 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-android-extensions'
+    id "androidx.navigation.safeargs"
+    id 'kotlin-kapt'
+}
+
+android {
+    compileSdk 30
+
+    defaultConfig {
+        applicationId "com.mk8.pruebarickmorty"
+        minSdk 26
+        targetSdk 30
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    flavorDimensions "rickmorty"
+
+    productFlavors {
+
+        dev {
+            dimension "rickmorty"
+            buildConfigField "String", "BASE_URL", '"https://rickandmortyapi.com/api/"'
+        }
+
+        prod {
+            dimension "rickmorty"
+            buildConfigField "String", "BASE_URL", '"https://rickandmortyapi.com/api/"'
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            resValue "string", "app_name", "Rick and Morty"
+        }
+
+        debug {
+            debuggable = true
+            resValue "string", "app_name", "Rick and Morty Dev"
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    buildFeatures {
+        viewBinding  true
+    }
+}
+
+dependencies {
+
+    implementation project(path: ':domain')
+    implementation project(path: ':data')
+
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation "androidx.core:core-ktx:$androidKTX"
+    implementation "androidx.appcompat:appcompat:$androidX_version"
+    implementation "com.google.android.material:material:$material_version"
+    implementation "androidx.multidex:multidex:$multidex_version"
+
+    //koin
+    implementation "org.koin:koin-androidx-scope:$koin_version"
+    implementation "org.koin:koin-androidx-viewmodel:$koin_version"
+
+    //Coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:$coroutines_version"
+
+    //Retrofit
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$coroutines_adapter"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+
+    //OkHttp
+    implementation "com.squareup.okhttp3:okhttp:$okHttp_version"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okHttp_version"
+
+    //View Model
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
+
+    //Navigation
+    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+
+    //View
+    implementation "androidx.recyclerview:recyclerview:$recycler_version"
+    implementation "androidx.constraintlayout:constraintlayout:$constraint_version"
+
+    //images
+    implementation "io.coil-kt:coil:$coil_version"
+    implementation "com.mikhaellopez:circularimageview:$circular_image"
+
+
+    testImplementation 'junit:junit:4.+'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+}
